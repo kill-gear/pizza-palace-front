@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="nav-wrapper">
       <div className="container">
         <Link to="/" className="brand-logo ">
-          Shopping
+          Pizza Palace
         </Link>
 
         <ul className="right">
@@ -17,7 +17,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/cart">
-              <i className="small material-icons">shopping_cart</i>
+              <i className=" material-icons">shopping_cart</i>
             </Link>
           </li>
         </ul>

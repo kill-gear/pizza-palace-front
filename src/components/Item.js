@@ -23,13 +23,13 @@ class Item extends Component {
           >
             <i className="material-icons">add</i>
           </span>
-          <span className="qty">{item.quantity}</span>
         </div>
 
         <div className="card-content">
           <p>{item.desc}</p>
-          <p>
+          <p className="item-details">
             <b>Price: {item.price}$</b>
+            <b>Quantity in Cart: {item.quantity}</b>
           </p>
         </div>
       </div>

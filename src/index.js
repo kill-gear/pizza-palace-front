@@ -5,9 +5,10 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import cartReducer from "./components/reducers/cartReducer";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import logger from "redux-logger";
 
-const store = createStore(cartReducer);
+const store = createStore(cartReducer, applyMiddleware(logger));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -36,6 +36,23 @@
   width: 150px;
   margin-right: 25px;
 }
+.collection {
+  border-style: none;
+}
+.cart-empty-container {
+  text-align: center;
+  border-style: hidden;
+
+  /* align-self: center; */
+  /* width: 300px; */
+}
+.cart-empty {
+  display: inline-block;
+}
 .item-desc {
   align-self: center;
+}
+
+.login-div {
+  display: flex;
 }

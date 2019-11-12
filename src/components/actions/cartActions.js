@@ -3,7 +3,8 @@ import {
   REMOVE_ITEM,
   SUB_QUANTITY,
   ADD_QUANTITY,
-  ADD_SHIPPING
+  ADD_SHIPPING,
+  INIT_ITEMS
 } from "./action-types/cart-actions";
 
 //add cart action
@@ -32,5 +33,12 @@ export const addQuantity = id => {
   return {
     type: ADD_QUANTITY,
     id
+  };
+};
+
+export const initItems = items => {
+  return {
+    type: INIT_ITEMS,
+    items
   };
 };

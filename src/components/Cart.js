@@ -7,6 +7,7 @@ import {
   subtractQuantity
 } from "./actions/cartActions";
 import cartReducer from "./reducers/cartReducer";
+import Checkout from "./Checkout";
 class Cart extends Component {
   handleRemove = id => {
     this.props.removeItem(id);
@@ -23,66 +24,74 @@ class Cart extends Component {
     let addedItems = this.props.items.length ? (
       this.props.items.map(item => {
         return (
-          <div className="cart-list">
-            <li className="collection-item avatar" key={item.id}>
-              <div className="item-img">
-                <img src={item.img} alt={item.img} />
+          <li className="collection-item avatar" key={item.id}>
+            <div className="item-img">
+              <img src={item.img} alt={item.img} />
+            </div>
+            <div className="item-desc">
+              <span className="title">{item.title}</span>
+              <p>{item.desc}</p>
+              <p>
+                <b>Price: €{item.price}</b>
+                {/* <b>Total Price : {this.props.total}</b> */}
+              </p>
+              <p>
+                <b>Quantity: {item.quantity}</b>
+              </p>
+              <div className="add-remove">
+                <Link to="/cart">
+                  <i
+                    className="material-icons"
+                    onClick={() => {
+                      this.handleAddQuantity(item.id);
+                    }}
+                  >
+                    arrow_drop_up
+                  </i>
+                </Link>
+                <Link to="/cart">
+                  <i
+                    className="material-icons"
+                    onClick={() => {
+                      this.handleSubtractQuantity(item.id);
+                    }}
+                  >
+                    arrow_drop_down
+                  </i>
+                </Link>
               </div>
-              <div className="item-desc">
-                <span className="title">{item.title}</span>
-                <p>{item.desc}</p>
-                <p>
-                  <b>Price: {item.price}$</b>
-                </p>
-                <p>
-                  <b>Quantity: {item.quantity}</b>
-                </p>
-                <div className="add-remove">
-                  <Link to="/cart">
-                    <i
-                      className="material-icons"
-                      onClick={() => {
-                        this.handleAddQuantity(item.id);
-                      }}
-                    >
-                      arrow_drop_up
-                    </i>
-                  </Link>
-                  <Link to="/cart">
-                    <i
-                      className="material-icons"
-                      onClick={() => {
-                        this.handleSubtractQuantity(item.id);
-                      }}
-                    >
-                      arrow_drop_down
-                    </i>
-                  </Link>
-                </div>
-                <button
-                  className="waves-effect waves-light btn pink remove"
-                  onClick={() => {
-                    this.handleRemove(item.id);
-                  }}
-                >
-                  Remove
-                </button>
-              </div>
-            </li>
-          </div>
+              <button
+                className="waves-effect waves-light btn pink remove"
+                onClick={() => {
+                  this.handleRemove(item.id);
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          </li>
         );
       })
     ) : (
-      <div>
-        <h2>Add Pizzas to cart :) </h2>
-        <img src="/empty-cart.svg" alt="Cart is Empty" className="empty-cart" />
+      <div className="cart-empty-container">
+        <div className="cart-empty">
+          <img
+            src="/empty-cart.svg"
+            alt="Cart is Empty"
+            className="empty-cart"
+          />
+          <h5>Add Pizzas to cart :) </h5>
+        </div>
       </div>
     );
     return (
       <div className="container">
         <div className="cart">
-          <h3>{this.props.items.length ? "You have ordered:" : null}</h3>
+          {this.props.items.length ? <h5>You have ordered: </h5> : null}
           <ul className="collection">{addedItems}</ul>
+          {this.props.items.length ? (
+            <Checkout total={this.props.total} />
+          ) : null}
         </div>
       </div>
     );
@@ -90,7 +99,8 @@ class Cart extends Component {
 }
 const mapStateToProps = state => {
   return {
-    items: state.items.filter(item => item.quantity > 0)
+    items: state.items.filter(item => item.quantity > 0),
+    total: state.total
   };
 };
 const mapDispatchToProps = dispatch => {

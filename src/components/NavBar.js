@@ -4,9 +4,17 @@ const Navbar = () => {
   return (
     <nav className="nav-wrapper">
       <div className="container">
-        <Link to="/" className="brand-logo ">
-          Pizza Palace
-        </Link>
+        <div>
+          <Link to="/" className="brand-logo">
+            <b style={{ color: "black" }}>Pizza Palace</b>
+            <img
+              vspace="0px"
+              hspace="10px"
+              src="./pizza-box.svg"
+              width="50px"
+            />
+          </Link>
+        </div>
 
         <ul className="right">
           <li>
@@ -16,8 +24,9 @@ const Navbar = () => {
             <Link to="/cart">My cart</Link>
           </li>
           <li>
-            <Link to="/cart">
-              <i className=" material-icons">shopping_cart</i>
+            <Link to="/login">
+              <i className="material-icons">shopping_cart</i>
+              Checkout
             </Link>
           </li>
         </ul>

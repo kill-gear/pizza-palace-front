@@ -28,7 +28,7 @@ class Item extends Component {
         <div className="card-content">
           <p>{item.desc}</p>
           <p className="item-details">
-            <b>Price: {item.price}$</b>
+            <b>Price: €{item.price}</b>
             <b>Quantity in Cart: {item.quantity}</b>
           </p>
         </div>

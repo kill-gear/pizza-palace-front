@@ -14,7 +14,7 @@ export default class Checkout extends Component {
           <div className="card smoke-white right">
             <div className="card-content black-text">
               <span className="card-title">
-                <b>Total Cart Value = </b> €{this.props.total}
+                <b>Total Cart Value: </b> €{this.props.total.toFixed(2)}
               </span>
               <div className="card-action">
                 {/* <div className="payment">

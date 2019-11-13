@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 // import chair from "./chair.jpg";
 // import gif from "./giphy.gif";
 
@@ -9,7 +10,7 @@ function Payment(props) {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const paypalRef = useRef();
-  let orderId = "12345";
+  const [orderId, setOrderId] = useState("-1");
   useEffect(async () => {
     window.paypal
       .Buttons({
@@ -29,7 +30,7 @@ function Payment(props) {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           setPaidFor(true);
-          orderId = order.id;
+          setOrderId(order.id);
           console.log(order);
         },
         onError: err => {
@@ -40,8 +41,7 @@ function Payment(props) {
       .render(paypalRef.current);
   }, [product.description, product.price]);
 
-  if (paidFor) {
-    alert("Your order has been successfully Placed. See you soon. :)");
+  if (paidFor && orderId != "-1") {
     const postData = async () => {
       const resp = await fetch("http://127.0.0.1:8000/api/orders", {
         method: "post",
@@ -60,6 +60,9 @@ function Payment(props) {
       });
 
       console.log(resp, " post request");
+      alert("Your order has been successfully Placed. See you soon. :)");
+      // props.history.push("/");
+      window.location.href = "http://localhost:3000/";
     };
     postData();
   }
@@ -80,7 +83,12 @@ function Payment(props) {
 }
 const mapStateToProps = state => {
   return {
-    items: state.items.filter(item => item.quantity > 0),
+    items: state.items
+      .filter(item => item.quantity > 0)
+      .map(item => ({
+        id: item.id,
+        quantity: item.quantity
+      })),
     name: state.name,
     email: state.email,
     address: state.address,

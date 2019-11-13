@@ -11,7 +11,7 @@ class Login extends Component {
 
   render() {
     const product = {
-      price: this.props.total
+      price: this.props.total.toFixed(2)
     };
 
     return (

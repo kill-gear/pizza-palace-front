@@ -1,47 +1,102 @@
 import React, { Component } from "react";
+import Payment from "./Payment";
+import { connect } from "react-redux";
+import { setFields } from "./actions/cartActions";
+class Login extends Component {
+  handleChange = event => {
+    const { value, name } = event.target;
+    this.props.setFields(name, value);
+    console.log(this.fields, "Inside final payment page");
+  };
 
-export default class Login extends Component {
   render() {
-    return (
-      <div className="login-div">
-        <div className="row">
-          <form className="col s12">
-            <div className="row">
-              <div className="input-field col s6">
-                <input id="first_name" type="text" className="validate" />
-                <label for="first_name">Name</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="email" type="email" className="validate" />
-                <label for="email">Email</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="password" type="password" className="validate" />
-                <label for="password">Password</label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="password" type="password" className="validate" />
-                <label for="confirm-password">Confirm Password</label>
-              </div>
-            </div>
-          </form>
+    const product = {
+      price: this.props.total
+    };
 
-          <button
-            className="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-          >
-            Register
-            <i className="material-icons right">send</i>
-          </button>
+    return (
+      <div className="row register">
+        <div className="sign-up-div">
+          <div className="row">
+            <form className="col s12">
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    onChange={this.handleChange}
+                    name="name"
+                    id="first_name"
+                    type="text"
+                    className="validate"
+                  />
+                  <label htmlFor="first_name">Name</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    onChange={this.handleChange}
+                    name="email"
+                    id="email"
+                    type="email"
+                    className="validate"
+                  />
+                  <label htmlFor="email">Email</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    onChange={this.handleChange}
+                    name="address"
+                    id="address1"
+                    type="text"
+                    className="validate"
+                  />
+                  <label htmlFor="address1">Delivery Address</label>
+                </div>
+              </div>
+            </form>
+
+            <div
+              className={
+                this.props.name.length &&
+                this.props.address.length &&
+                this.props.email.length
+                  ? "payment"
+                  : "payment disabled"
+              }
+            >
+              <Payment handleChange={this.handleChange} product={product} />
+            </div>
+
+            {/* <button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Register
+              <i className="material-icons right">send</i>
+            </button> */}
+          </div>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  total: state.total,
+  name: state.name,
+  email: state.email,
+  address: state.address
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setFields: (name, value) => {
+      dispatch(setFields(name, value));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -4,7 +4,8 @@ import {
   SUB_QUANTITY,
   ADD_QUANTITY,
   ADD_SHIPPING,
-  INIT_ITEMS
+  INIT_ITEMS,
+  SET_FIELDS
 } from "./action-types/cart-actions";
 
 //add cart action
@@ -40,5 +41,13 @@ export const initItems = items => {
   return {
     type: INIT_ITEMS,
     items
+  };
+};
+
+export const setFields = (name, value) => {
+  return {
+    type: SET_FIELDS,
+    name,
+    value
   };
 };

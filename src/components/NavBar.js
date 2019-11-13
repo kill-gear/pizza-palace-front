@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+import { connect } from "react-redux";
+const Navbar = props => {
+  let redirect = props.total ? "/payment" : "/";
   return (
     <nav className="nav-wrapper">
       <div className="container">
@@ -24,9 +26,8 @@ const Navbar = () => {
             <Link to="/cart">My cart</Link>
           </li>
           <li>
-            <Link to="/login">
+            <Link to={redirect}>
               <i className="material-icons">shopping_cart</i>
-              Checkout
             </Link>
           </li>
         </ul>
@@ -35,4 +36,10 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    total: state.total
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

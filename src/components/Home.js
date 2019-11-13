@@ -5,18 +5,21 @@ import Item from "./Item";
 
 class Home extends Component {
   componentDidMount = async () => {
-    let rawItems = await fetch("http://127.0.0.1:8000/api/pizzas/").then(val =>
-      val.json()
-    );
-    let items = rawItems.map(item => ({
-      id: item.id,
-      title: item.name,
-      desc: item.description,
-      quantity: 0,
-      img: item.image_url,
-      price: parseFloat(item.price)
-    }));
-    this.props.initItems(items);
+    // console.log(this.props.items, "component re-render hacky");
+    if (this.props.items.length === 0) {
+      let rawItems = await fetch(
+        "http://127.0.0.1:8000/api/pizzas/"
+      ).then(val => val.json());
+      let items = rawItems.map(item => ({
+        id: item.id,
+        title: item.name,
+        desc: item.description,
+        quantity: 0,
+        img: item.image_url,
+        price: parseFloat(item.price)
+      }));
+      this.props.initItems(items);
+    }
   };
 
   render() {

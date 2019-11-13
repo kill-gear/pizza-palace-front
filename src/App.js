@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Navbar from "./components/NavBar";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
+import { stat } from "fs";
 class App extends React.Component {
   render() {
     return (
@@ -13,7 +14,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/cart" component={Cart} />
-            <Route path="/login" component={Login} />
+            <Route path="/payment" component={Login} />}
           </Switch>
         </div>
       </BrowserRouter>

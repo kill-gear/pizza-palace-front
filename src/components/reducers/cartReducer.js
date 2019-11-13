@@ -3,12 +3,16 @@ import {
   REMOVE_ITEM,
   SUB_QUANTITY,
   ADD_QUANTITY,
-  INIT_ITEMS
+  INIT_ITEMS,
+  SET_FIELDS
 } from "../actions/action-types/cart-actions";
 
 const initState = {
   items: [],
-  total: 0
+  total: 0,
+  name: "",
+  email: "",
+  address: ""
 };
 
 const cartReducer = (state = initState, action) => {
@@ -66,6 +70,14 @@ const cartReducer = (state = initState, action) => {
       items: action.items
     };
   }
+
+  if (action.type === SET_FIELDS) {
+    return {
+      ...state,
+      [action.name]: action.value
+    };
+  }
+
   return state;
 };
 

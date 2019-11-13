@@ -13,7 +13,7 @@ class Item extends Component {
       <div className="card" key={item.id}>
         <div className="card-image">
           <img src={item.img} alt={item.title} />
-          <span className="card-title">{item.title}</span>
+          <span className="card-title pizza-title">{item.title}</span>
           <span
             to="/"
             className="btn-floating halfway-fab waves-effect waves-light red"
@@ -45,7 +45,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Item);
+export default connect(null, mapDispatchToProps)(Item);

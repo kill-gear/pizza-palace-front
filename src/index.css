@@ -12,6 +12,8 @@
 }
 .card .card-image .card-title {
   color: black;
+  position: relative;
+  padding: 24px;
   font-weight: 400;
 }
 .item-details {
@@ -54,5 +56,24 @@
 }
 
 .login-div {
+  display: flexbox;
+}
+.sign-up-div {
+  display: flexbox;
+}
+
+.register {
+  /* width: 100%; */
+  margin: 50px;
   display: flex;
+  flex: wrap;
+  justify-content: space-between;
+}
+
+/* .pizza-title {
+  color: beige !important;
+} */
+
+.disabled {
+  pointer-events: none;
 }

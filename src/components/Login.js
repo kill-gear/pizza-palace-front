@@ -68,15 +68,6 @@ class Login extends Component {
             >
               <Payment handleChange={this.handleChange} product={product} />
             </div>
-
-            {/* <button
-              className="btn waves-effect waves-light"
-              type="submit"
-              name="action"
-            >
-              Register
-              <i className="material-icons right">send</i>
-            </button> */}
           </div>
         </div>
       </div>

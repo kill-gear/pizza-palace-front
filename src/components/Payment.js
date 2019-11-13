@@ -1,9 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+require("dotenv").config();
+
 // import chair from "./chair.jpg";
 // import gif from "./giphy.gif";
-
+let API_URL = "";
+if (process.env.NODE_ENV === "development") {
+  API_URL = process.env.REACT_APP_API_URL_DEV;
+} else {
+  API_URL = process.env.REACT_APP_API_URL_PROD;
+}
 function Payment(props) {
   let product = props.product;
   let items = props.items;
@@ -43,7 +50,7 @@ function Payment(props) {
 
   if (paidFor && orderId != "-1") {
     const postData = async () => {
-      const resp = await fetch("http://127.0.0.1:8000/api/orders", {
+      const resp = await fetch(`${API_URL}/api/orders`, {
         method: "post",
         headers: {
           "Content-Type": "application/json"
@@ -62,7 +69,7 @@ function Payment(props) {
       console.log(resp, " post request");
       alert("Your order has been successfully Placed. See you soon. :)");
       // props.history.push("/");
-      window.location.href = "http://localhost:3000/";
+      window.location.href = `${process.env.REACT_APP_URL}/`;
     };
     postData();
   }
@@ -75,11 +82,6 @@ function Payment(props) {
       <div ref={paypalRef} />
     </div>
   );
-  //    <div>
-  //   //   {error && <div>Uh oh, an error occurred! {error.message}</div>}
-  //   //   {/* <img alt={product.description} src={product.image} width="200" /> */}
-  //      <div ref={paypalRef} />
-  //    </div>
 }
 const mapStateToProps = state => {
   return {

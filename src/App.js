@@ -13,8 +13,8 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/payment" component={Login} />}
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/payment" component={Login} />}
           </Switch>
         </div>
       </BrowserRouter>

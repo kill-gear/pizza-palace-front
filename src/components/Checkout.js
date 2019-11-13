@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 
 export default class Checkout extends Component {
   render() {
-    // const product = {
-    //  price: this.props.total
-    // };
-
     return (
       <div className="total-cart">
         <div className="col s12 m6">
@@ -32,8 +28,6 @@ export default class Checkout extends Component {
                   </button>
                 </Link>
               </div>
-              {/* <a href="#">This is a link</a>
-              <a href="#">This is a link</a> */}
             </div>
           </div>
         </div>

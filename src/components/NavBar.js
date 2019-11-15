@@ -25,11 +25,11 @@ const Navbar = props => {
           <li>
             <Link to="/cart">My cart</Link>
           </li>
-          <li>
-            <Link to={redirect}>
+          {/* <li>
+            <Link to="/payment">
               <i className="material-icons">shopping_cart</i>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </nav>

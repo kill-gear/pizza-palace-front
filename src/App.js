@@ -4,7 +4,6 @@ import Home from "./components/Home";
 import Navbar from "./components/NavBar";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
-import { stat } from "fs";
 class App extends React.Component {
   render() {
     return (
